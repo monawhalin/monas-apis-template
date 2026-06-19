@@ -188,7 +188,7 @@ const methodClass = (method: string) =>
       <div class="mt-7 grid gap-6 md:grid-cols-[0.9fr_1.5fr] md:items-stretch">
         <div class="flex h-full flex-col gap-6">
           <div class="repo-panel overflow-hidden rounded-2xl">
-            <img src="/portrait.jpg" alt={profile.name} class="h-auto w-full object-contain" loading="lazy" />
+            <img src={`${import.meta.env.BASE_URL}portrait.jpg`} alt={profile.name} class="h-auto w-full object-contain" loading="lazy" />
           </div>
           <div id="profile-specs" class="repo-panel flex-1 rounded-2xl p-6">
             <dl class="space-y-3 font-mono text-sm">
