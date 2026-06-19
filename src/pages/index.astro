@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const profile = {
+  name: 'Your Name',
+  nickname: 'Your Name',
+  role: 'Your role',
+  alias: 'your-alias',
+  baseUrl: 'https://your-site.example',
+  version: '1.0.0',
+  updated: 'Month YYYY',
+  location: 'City, ST',
+  linkedin: 'https://www.linkedin.com/in/your-profile/',
+  email: 'you@example.com',
+};
+
+const templateRepo = 'https://github.com/monawhalin/monas-apis-template';
+
+const bio = {
+  lead: 'I help teams turn ambiguous problems into useful products.',
+  paragraphs: [
+    'Use this section to introduce your current role, the kind of work you do, and what people can come to you for.',
+    'Add a short career arc. Mention the products, domains, or customer problems that shaped how you work.',
+    'Close with a human note: where you live, what you do outside work, and what helps teammates connect with you as a person.',
+  ],
+};
+
+const nav = [
+  { label: 'about', href: '#hello' },
+  { label: 'comms', href: '#communication' },
+  { label: 'specs', href: '#specs' },
+  { label: 'auth', href: '#auth' },
+  { label: 'endpoints', href: '#endpoints' },
+  { label: 'spotlight', href: '#spotlight' },
+];
+
+const capabilities = [
+  { key: 'systems_thinking', title: 'Systems thinker', body: 'I like to understand the whole system before optimizing one part of it.' },
+  { key: 'clarity', title: 'Clarity and direction', body: 'I turn messy inputs into a shared frame, a decision, and a next step.' },
+  { key: 'customer_focus', title: 'Customer-backed judgment', body: 'I trust real customer signals more than internal opinions when the two disagree.' },
+  { key: 'execution', title: 'Execution with context', body: 'I care about momentum, but I want the team to understand why the work matters.' },
+];
+
+const defaults = [
+  { key: 'communication_style', value: 'direct and kind', note: 'I prefer clear, candid communication with enough context to make the discussion useful.' },
+  { key: 'decision_mode', value: 'fast when reversible', note: 'I like moving quickly on reversible decisions and spending more time on durable ones.' },
+  { key: 'working_style', value: 'async first, meeting when useful', note: 'A good doc can save a meeting. A good meeting can save a week of drift.' },
+  { key: 'team_culture', value: 'shared ownership', note: 'I want people to feel trusted to own decisions and supported when things get hard.' },
+];
+
+const limitations = [
+  { key: 'moves_fast', title: 'I can move fast', body: 'If I skip context or move too quickly, ask me to slow down and show the reasoning.' },
+  { key: 'thinks_out_loud', title: 'I think out loud', body: 'Early ideas are not always direction. They are often a way to find the shape of the problem.' },
+  { key: 'big_picture_first', title: 'I start with the big picture', body: 'Tell me when you need the smallest next step instead of the long-term map.' },
+];
+
+const patching = [
+  'Write one thing you are actively improving this year.',
+  'Write another growth area teammates can help you practice.',
+];
+
+const trust = {
+  gains: [
+    { title: 'Be direct early', body: 'Raise risks while there is still time to do something about them.' },
+    { title: 'Bring a point of view', body: 'I do not need the perfect answer, but I appreciate a thoughtful recommendation.' },
+    { title: 'Keep commitments', body: 'If something changes, say so early and reset expectations.' },
+    { title: 'Share credit', body: 'Make sure the people doing the work are visible.' },
+  ],
+  loses: [
+    { title: 'Surprises that could have been avoided', body: 'I would rather hear bad news early than polished news late.' },
+    { title: 'Withholding context', body: 'Missing information slows decisions and erodes trust.' },
+    { title: 'Cynicism with no path forward', body: 'Critique is useful. Negativity without alternatives is not.' },
+  ],
+};
+
+const endpoints = [
+  {
+    method: 'POST',
+    path: '/decisions',
+    summary: 'Get my input on a decision',
+    request: ['The decision needed', 'Your recommendation', 'Options considered', 'Tradeoffs and urgency'],
+    response: 'I will help separate reversible from durable decisions, test the tradeoffs, and get clear on who owns the call.',
+  },
+  {
+    method: 'POST',
+    path: '/escalations',
+    summary: 'Flag something off track',
+    request: ['What is blocked', 'Impact and urgency', 'What you have tried', 'The specific help needed'],
+    response: 'Bring me in early. I can help unblock, reframe, or find the right owner before the problem gets expensive.',
+  },
+  {
+    method: 'PUT',
+    path: '/feedback',
+    summary: 'Give or receive feedback',
+    request: ['Specific behavior', 'Impact', 'What should change'],
+    response: 'I prefer feedback close to the moment, grounded in specifics, and treated as a conversation.',
+  },
+  {
+    method: 'PATCH',
+    path: '/brainstorm',
+    summary: 'Work through ambiguity',
+    request: ['Problem statement', 'Constraints', 'Where you are stuck'],
+    response: 'Half-formed is welcome. I am happy to pressure-test, frame, and help find the next useful step.',
+  },
+];
+
+const channels = [
+  { name: 'Chat', use: 'Quick unblock', detail: 'Short questions, urgent pings, and lightweight coordination.' },
+  { name: 'Email', use: 'Async context', detail: 'Longer thoughts, decisions, docs, or anything that benefits from a careful response.' },
+  { name: 'Docs', use: 'Shared memory', detail: 'Use a doc when the decision or context needs to survive the meeting.' },
+];
+
+const comms = [
+  { title: 'Core hours', body: 'Share your usual working hours and how you handle time zones.' },
+  { title: 'Response expectations', body: 'Say what people should expect from chat, email, comments, and docs.' },
+  { title: 'Meeting preferences', body: 'Explain when you prefer meetings, when async works better, and what makes a meeting useful.' },
+  { title: 'Feedback style', body: 'Tell teammates how you like to give and receive feedback.' },
+];
+
+const spotlight = [
+  { kind: 'Writing', color: 'text-repo', action: 'Read', title: 'Replace with a post, talk, project, or launch', outlet: 'Publication or venue', date: 'YYYY', href: 'https://example.com', blurb: 'One sentence on why this work matters.' },
+  { kind: 'Project', color: 'text-blue', action: 'Open', title: 'Replace with another highlight', outlet: 'Team or venue', date: 'YYYY', href: 'https://example.com', blurb: 'Keep this concrete and easy to scan.' },
+];
+
+const methodClass = (method: string) =>
+  ({ GET: 'method-get', POST: 'method-post', PUT: 'method-put', PATCH: 'method-patch' })[method] ?? 'method-get';
+---
+
+<Layout title={`${profile.nickname}'s APIs`}>
+  <header class="sticky top-0 z-30 border-b border-ink/10 bg-paper/85 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
+      <a href="#overview" class="flex items-center gap-2.5">
+        <span class="status-dot"></span>
+        <span class="font-mono text-sm font-semibold text-ink">my.apis</span>
+        <span class="label-chip hidden text-slate sm:inline-block">v{profile.version}</span>
+      </a>
+      <nav class="hidden items-center gap-5 md:flex">
+        {nav.map((item) => <a class="nav-link" href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" class="inline-flex items-center justify-center rounded-lg border border-blue/30 p-2 text-blue transition hover:bg-blue/10">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href={`mailto:${profile.email}`} aria-label="Email" title="Email" class="inline-flex items-center justify-center rounded-lg border border-coral/30 p-2 text-coral transition hover:bg-coral/10">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        </a>
+        <a href="#endpoints" class="rounded-lg bg-ink px-3.5 py-2 font-mono text-xs font-semibold text-porcelain transition hover:bg-ink/90">how to work with me</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-5">
+    <section id="overview" class="py-16 sm:py-24">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span class="label-chip text-slate">GET /overview</span>
+        <span class="label-chip text-repo">200 OK</span>
+        <span class="label-chip text-slate">updated {profile.updated}</span>
+      </div>
+      <h1 class="mt-6 font-display text-5xl font-[750] leading-[1.05] text-ink sm:text-7xl">{`${profile.nickname}'s APIs`}</h1>
+
+      <div class="mt-8 grid items-stretch gap-4 md:grid-cols-[1.5fr_1fr]">
+        <div class="rounded-2xl border border-dashed border-blue/30 bg-blue/[0.04] p-6 animate-panel-in">
+          <p class="font-mono text-xs font-semibold uppercase tracking-wide text-blue">// why this exists</p>
+          <p class="mt-3 font-sans text-base leading-relaxed text-ink">
+            Each person is unique in how they work, lead, and collaborate. This page is a practical guide to your operating style: who you are, what you value, what to expect from you, and how teammates can work well with you.
+          </p>
+        </div>
+        <a href={templateRepo} target="_blank" rel="noopener" class="terminal-card group block overflow-hidden rounded-2xl border border-ink/15 bg-ink shadow-sm transition hover:shadow-md">
+          <div class="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-coral"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-brass"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-repo"></span>
+            <span class="ml-2 font-mono text-xs text-paper/50">make-your-own - bash</span>
+          </div>
+          <div class="px-4 py-4 font-mono text-sm leading-relaxed">
+            <p class="text-paper/40"># fork this starter and make it yours</p>
+            <p class="mt-1 flex items-center"><span class="text-repo">$</span><span class="terminal-type ml-1 text-paper">npx degit monawhalin/monas-apis-template</span></p>
+            <p class="terminal-output mt-2 text-paper/60">&rarr; scaffold your own APIs site</p>
+            <p class="terminal-output mt-1 font-semibold text-blue transition group-hover:translate-x-0.5">use template &rarr;</p>
+          </div>
+        </a>
+      </div>
+
+      <div id="hello" class="mt-12 flex flex-wrap items-baseline justify-between gap-3">
+        <h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Hello, I&rsquo;m {profile.name}</h2>
+        <span class="label-chip text-slate">GET /about</span>
+      </div>
+      <div class="mt-7 grid gap-6 md:grid-cols-[0.9fr_1.5fr] md:items-stretch">
+        <div class="flex h-full flex-col gap-6">
+          <div class="repo-panel overflow-hidden rounded-2xl">
+            <img src="/portrait.jpg" alt={profile.name} class="h-auto w-full object-contain" loading="lazy" />
+          </div>
+          <div id="profile-specs" class="repo-panel flex-1 rounded-2xl p-6">
+            <dl class="space-y-3 font-mono text-sm">
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">name</dt><dd class="font-semibold text-ink">{profile.name}</dd></div>
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">nickname</dt><dd class="font-semibold text-ink">{profile.nickname}</dd></div>
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">role</dt><dd class="font-semibold text-ink">{profile.role}</dd></div>
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">alias</dt><dd class="font-semibold text-ink">{profile.alias}</dd></div>
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">base_url</dt><dd class="font-semibold text-ink">{profile.baseUrl}</dd></div>
+              <div class="flex items-center justify-between gap-3"><dt class="text-slate">location</dt><dd class="font-semibold text-ink">{profile.location}</dd></div>
+            </dl>
+          </div>
+        </div>
+        <div class="repo-panel rounded-2xl p-6 sm:p-8">
+          <p class="font-display text-xl font-[650] leading-snug text-ink sm:text-2xl" set:html={bio.lead}></p>
+          <div class="mt-4 space-y-4">
+            {bio.paragraphs.map((paragraph) => <p class="font-sans text-base leading-relaxed text-slate" set:html={paragraph}></p>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="communication" class="border-t border-ink/10 py-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-3"><h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Communication</h2><span class="label-chip text-slate">GET /communication</span></div>
+      <p class="mt-4 max-w-2xl font-sans text-lg leading-relaxed text-slate">The best ways to reach you, and how you think about meetings, async work, and focus time.</p>
+      <ol class="mt-8 divide-y divide-line border-y border-line">
+        {comms.map((item, index) => <li class="flex gap-4 py-5 sm:gap-6"><span class="font-mono text-sm font-semibold text-blue">{(index + 1).toString().padStart(2, '0')}</span><div><h3 class="font-display text-lg font-[650] text-ink">{item.title}</h3><p class="mt-1 font-sans text-base leading-relaxed text-slate">{item.body}</p></div></li>)}
+      </ol>
+      <p class="mt-10 font-mono text-xs font-semibold uppercase tracking-wide text-repo">// channels</p>
+      <div class="mt-4 grid gap-3 md:grid-cols-3">
+        {channels.map((channel) => <div class="rounded-2xl border border-line bg-porcelain/50 p-5 transition hover:bg-porcelain hover:shadow-sm"><div class="flex flex-wrap items-baseline gap-x-2 font-mono text-sm"><span class="text-coral">{channel.name}</span><span class="text-slate">=</span><span class="font-semibold text-repo">{channel.use}</span></div><p class="mt-2 font-sans text-sm leading-relaxed text-slate">{channel.detail}</p></div>)}
+      </div>
+    </section>
+
+    <section id="specs" class="border-t border-ink/10 py-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-3"><h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Spec Sheet</h2><span class="label-chip text-slate">GET /specs</span></div>
+      <p class="mt-4 font-sans text-lg leading-relaxed text-slate">What you are optimized for, the settings you ship with, and the honest edge cases teammates should know.</p>
+      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+        <div class="code-block overflow-x-auto p-6 lg:col-span-2"><p class="font-mono text-xs text-slate">// capabilities.json</p><div class="mt-4 grid gap-x-8 gap-y-5 sm:grid-cols-2">{capabilities.map((item) => <div><p><span class="text-coral">&quot;{item.key}&quot;</span><span class="text-slate">: </span><span class="text-repo">&quot;{item.title}&quot;</span></p><p class="mt-1 font-sans text-sm leading-relaxed text-slate">{item.body}</p></div>)}</div></div>
+        <div class="code-block overflow-x-auto p-6"><p class="font-mono text-xs text-slate">// defaults.json</p><div class="mt-4 space-y-5">{defaults.map((item) => <div><p><span class="text-coral">&quot;{item.key}&quot;</span><span class="text-slate">: </span><span class="text-repo">&quot;{item.value}&quot;</span></p><p class="mt-1 font-sans text-sm leading-relaxed text-slate">{item.note}</p></div>)}</div></div>
+      </div>
+      <div class="mt-4 grid gap-4 md:grid-cols-2">
+        <div class="code-block overflow-x-auto p-6"><p class="font-mono text-xs text-slate">// limitations.json</p><div class="mt-4 space-y-5">{limitations.map((item) => <div><p><span class="text-coral">&quot;{item.key}&quot;</span><span class="text-slate">: </span><span class="text-repo">&quot;{item.title}&quot;</span></p><p class="mt-1 font-sans text-sm leading-relaxed text-slate">{item.body}</p></div>)}</div></div>
+        <div class="code-block overflow-x-auto p-6"><p class="font-mono text-xs font-semibold uppercase tracking-wide text-blue">// actively patching</p><ul class="mt-4 space-y-3">{patching.map((item) => <li class="flex gap-2 font-sans text-sm leading-relaxed text-ink"><span class="mt-0.5 font-mono text-repo">~</span><span>{item}</span></li>)}</ul></div>
+      </div>
+    </section>
+
+    <section id="auth" class="border-t border-ink/10 py-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-3"><h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Authentication</h2><span class="label-chip text-slate">how trust is granted</span></div>
+      <p class="mt-4 font-sans text-lg leading-relaxed text-slate">Trust is the token that authorizes everything else. Say what earns trust with you, and what tends to erode it.</p>
+      <div class="mt-7 grid gap-4 md:grid-cols-2">
+        <div class="repo-panel rounded-2xl p-6"><p class="font-mono text-xs font-semibold uppercase tracking-wide text-repo">200 - grants trust</p><ul class="mt-4 space-y-4">{trust.gains.map((item) => <li class="flex gap-2 text-ink"><span class="mt-1 font-mono text-repo">+</span><div><p class="font-display text-base font-[650] leading-snug text-ink">{item.title}</p><p class="mt-1 font-sans text-sm leading-relaxed text-slate">{item.body}</p></div></li>)}</ul></div>
+        <div class="repo-panel rounded-2xl p-6"><p class="font-mono text-xs font-semibold uppercase tracking-wide text-coral">401 - revokes trust</p><ul class="mt-4 space-y-4">{trust.loses.map((item) => <li class="flex gap-2 text-ink"><span class="mt-1 font-mono text-coral">-</span><div><p class="font-display text-base font-[650] leading-snug text-ink">{item.title}</p><p class="mt-1 font-sans text-sm leading-relaxed text-slate">{item.body}</p></div></li>)}</ul></div>
+      </div>
+    </section>
+
+    <section id="endpoints" class="border-t border-ink/10 py-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-3"><h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Endpoints</h2><span class="label-chip text-slate">how to work with me</span></div>
+      <p class="mt-4 font-sans text-lg leading-relaxed text-slate">Concrete ways to engage you, with the request format that gets the best response.</p>
+      <div class="mt-7 space-y-4">
+        {endpoints.map((endpoint, index) => <details class="repo-panel group rounded-2xl p-6 open:shadow-panel" name="endpoint" open={index === 0}><summary class="flex cursor-pointer list-none flex-wrap items-center gap-3"><span class={`method-pill ${methodClass(endpoint.method)}`}>{endpoint.method}</span><span class="endpoint-path">{endpoint.path}</span><span class="font-sans text-sm text-slate">- {endpoint.summary}</span><svg class="ml-auto h-5 w-5 shrink-0 text-slate transition-transform duration-200 group-open:rotate-180" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8l5 5 5-5" /></svg></summary><div class="mt-5 grid gap-5 md:grid-cols-2"><div><p class="font-mono text-xs font-semibold uppercase tracking-wide text-blue">request body</p><ul class="mt-3 space-y-2">{endpoint.request.map((requestItem) => <li class="flex gap-2 font-sans text-sm leading-relaxed text-ink"><span class="mt-0.5 font-mono text-repo">+</span><span>{requestItem}</span></li>)}</ul></div><div><p class="font-mono text-xs font-semibold uppercase tracking-wide text-repo">200 response</p><p class="mt-3 font-sans text-sm leading-relaxed text-slate">{endpoint.response}</p></div></div></details>)}
+      </div>
+    </section>
+
+    <section id="spotlight" class="border-t border-ink/10 py-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-3"><h2 class="font-display text-3xl font-[700] text-ink sm:text-4xl">Spotlight</h2><span class="label-chip text-slate">GET /spotlight</span></div>
+      <p class="mt-4 font-sans text-lg leading-relaxed text-slate">Optional highlights: writing, launches, talks, projects, or press.</p>
+      <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {spotlight.map((item) => <a href={item.href} target="_blank" rel="noopener" class="spotlight-card repo-panel group flex flex-col rounded-xl p-4 transition hover:shadow-sm"><div class="flex items-center justify-between gap-2"><span class={`font-mono text-[10px] font-semibold uppercase tracking-wide ${item.color}`}>{item.kind}</span><span class="font-mono text-[10px] text-slate">{item.date}</span></div><p class="mt-2 font-display text-sm font-[650] leading-snug text-ink">{item.title}</p><p class="mt-1 font-mono text-[11px] text-slate">{item.outlet}</p><p class="mt-2 font-sans text-xs leading-relaxed text-slate line-clamp-3">{item.blurb}</p><span class="mt-auto pt-3 font-mono text-[11px] font-semibold text-blue transition group-hover:translate-x-0.5">{item.action} &rarr;</span></a>)}
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-ink/10 py-10">
+    <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-5 sm:flex-row sm:items-center">
+      <p class="font-mono text-xs text-slate">That is how to work with me, in a nutshell. Want to know more? Just ask.</p>
+      <p class="font-mono text-xs text-slate">{profile.name} - v{profile.version}</p>
+    </div>
+  </footer>
+</Layout>

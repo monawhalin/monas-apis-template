@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,750&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #1e1926;
+  background: #f7f1e7;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(231, 93, 80, 0.16), transparent 26rem),
+    radial-gradient(circle at 86% 10%, rgba(49, 91, 189, 0.12), transparent 30rem),
+    linear-gradient(135deg, rgba(30, 25, 38, 0.055) 1px, transparent 1px),
+    #f7f1e7;
+  background-size: auto, auto, 26px 26px, auto;
+}
+
+::selection {
+  color: #fffdf8;
+  background: #1e1926;
+}
+
+.repo-panel {
+  border: 1px solid rgba(30, 25, 38, 0.16);
+  background: rgba(255, 253, 248, 0.82);
+  box-shadow: 0 24px 80px rgba(30, 25, 38, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.hairline-grid {
+  background-image: linear-gradient(rgba(30, 25, 38, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 25, 38, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.label-chip {
+  border: 1px solid rgba(30, 25, 38, 0.16);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 999px;
+  background: #2f8f5b;
+  box-shadow: 0 0 0 5px rgba(47, 143, 91, 0.16);
+}
+
+.method-pill {
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  color: #fffdf8;
+}
+
+.method-get { background: #2f8f5b; }
+.method-post { background: #315bbd; }
+.method-put { background: #c9942e; }
+.method-patch { background: #8a5cc9; }
+
+.endpoint-path {
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e1926;
+}
+
+.nav-link {
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(70, 65, 81, 0.85);
+  transition: color 0.18s ease;
+}
+
+.nav-link:hover {
+  color: #1e1926;
+}
+
+.code-block {
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #2b2535;
+  background: rgba(30, 25, 38, 0.04);
+  border: 1px solid rgba(30, 25, 38, 0.1);
+  border-radius: 0.75rem;
+}
+
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+  animation: scan 5.5s ease-in-out infinite;
+}
+
+@media (max-width: 760px) {
+  body {
+    background-size: auto, auto, 20px 20px, auto;
+  }
+}
+
+/* Terminal "make your own" card — typewriter + blinking caret */
+.terminal-type {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-right: 2px solid rgba(247, 241, 231, 0.75);
+  width: 0;
+  animation:
+    terminal-typing 1.8s steps(38, end) 0.5s forwards,
+    terminal-caret 0.85s step-end 0.5s infinite;
+}
+
+.terminal-output {
+  opacity: 0;
+  transform: translateY(2px);
+  animation: terminal-reveal 0.45s ease 2.4s forwards;
+}
+
+/* Re-run the type animation whenever the card is hovered/focused */
+.terminal-card:hover .terminal-type,
+.terminal-card:focus-visible .terminal-type {
+  animation:
+    terminal-typing 1.4s steps(38, end) forwards,
+    terminal-caret 0.85s step-end infinite;
+}
+
+@keyframes terminal-typing {
+  from { width: 0; }
+  to { width: 38ch; }
+}
+
+@keyframes terminal-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: rgba(247, 241, 231, 0.75); }
+}
+
+@keyframes terminal-reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* What's-new ticker marquee */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.whats-new-track {
+  animation: ticker-scroll 32s linear infinite;
+}
+.whats-new-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-type {
+    width: 38ch;
+    border-right: 0;
+    animation: none;
+  }
+  .terminal-output {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .whats-new-track {
+    animation: none;
+  }
+}
