@@ -5,6 +5,8 @@ const {
   title = 'My APIs',
   description = 'A practical guide to working with me: how I communicate, decide, lead, and collaborate.',
 } = Astro.props;
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -13,8 +15,8 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
-    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}favicon.png`} />
+    <link rel="icon" type="image/png" href={`${basePath}/favicon.png`} />
+    <link rel="apple-touch-icon" href={`${basePath}/favicon.png`} />
     <title>{title}</title>
   </head>
   <body>
